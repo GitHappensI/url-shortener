@@ -10,15 +10,3 @@ dependencies = [
     "gunicorn",
     "redis",
 ]
-
-[project.optional-dependencies]
-dev = [
-    "bandit",
-    "black",
-    "flake8",
-    "isort",
-    "pylint",
-    "pytest",
-    "pytest-timeout",
-    "requests",
-]
