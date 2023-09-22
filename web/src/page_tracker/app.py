@@ -1,5 +1,3 @@
-# src/page_tracker/app.py
-
 import os
 from functools import cache
 import uuid
@@ -7,9 +5,9 @@ import uuid
 from flask import Flask, request, jsonify, redirect, render_template
 from redis import Redis, RedisError
 
-HOST_NAME = "http://localhost:5000"
+HOST_NAME = "http://localhost"
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="/home/realpython/src/page_tracker/templates", static_folder="/home/realpython/src/page_tracker/static")
 
 
 @app.get("/")
