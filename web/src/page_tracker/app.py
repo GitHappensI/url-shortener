@@ -9,27 +9,16 @@ HOST_NAME = "http://localhost"
 
 app = Flask(__name__, template_folder="/home/realpython/src/page_tracker/templates", static_folder="/home/realpython/src/page_tracker/static")
 
-
-@app.get("/")
-def index():
-    try:
-        page_views = redis().incr("page_views")
-    except RedisError:
-        app.logger.exception("Redis error")  # pylint: disable=E1101
-        return "Sorry, something went wrong \N{pensive face}", 500
-    else:
-        return f"This page has been seen {page_views} times."
-    
-@app.route("/shorten_url", methods=["GET", "POST"])
+@app.route("/", methods=["GET", "POST"])
 def shorten_url():
     if request.method == 'POST':
         original_url = request.form["url"]
 
         # Generiere eine eindeutige ID für die verkürzte URL
-        short_url_id = str(uuid.uuid4())[:8]
+        short_url_id = "id" + str(uuid.uuid4())[:8]
 
         # Speichere die Verknüpfung zwischen der Original-URL und der verkürzten URL in Redis
-        redis().set("id:" + short_url_id, original_url)
+        redis().set(short_url_id, original_url)
 
         urls_shortened = redis().incr("urls_shortened")
 
