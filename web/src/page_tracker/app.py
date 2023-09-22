@@ -4,8 +4,10 @@ import os
 from functools import cache
 import uuid
 
-from flask import Flask, request, jsonify, redirect
+from flask import Flask, request, jsonify, redirect, render_template
 from redis import Redis, RedisError
+
+HOST_NAME = "http://localhost:5000"
 
 app = Flask(__name__)
 
@@ -20,25 +22,22 @@ def index():
     else:
         return f"This page has been seen {page_views} times."
     
-@app.route("/shorten_url", methods=["POST"])
+@app.route("/shorten_url", methods=["GET", "POST"])
 def shorten_url():
-    try:
-        original_url = request.form.get("original_url")
-        if not original_url:
-            return "Original URL is required", 400
+    if request.method == 'POST':
+        original_url = request.form["url"]
 
         # Generiere eine eindeutige ID für die verkürzte URL
         short_url_id = str(uuid.uuid4())[:8]
-        shortened_url = f"http://localhost/{short_url_id}"
 
         # Speichere die Verknüpfung zwischen der Original-URL und der verkürzten URL in Redis
         redis().set(short_url_id, original_url)
 
-        return f"Shortened URL: {shortened_url}"
-    except Exception as e:
-        app.logger.exception("Error shortening URL")
-        return "Sorry, something went wrong \N{pensive face}", 500
+        # Display the template HTML with the generated url
+        return render_template('index.html', short_url_id=short_url_id, host_url = HOST_NAME)
     
+    return render_template('index.html')
+
 # Route to redirect to a particular shortened url if found
 @app.route('/<short_url_id>')
 def redirect_to_original_url(short_url_id):
