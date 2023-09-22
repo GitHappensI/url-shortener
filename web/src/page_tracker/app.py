@@ -15,7 +15,8 @@ def shorten_url():
         original_url = request.form["url"]
 
         # Generiere eine eindeutige ID für die verkürzte URL
-        short_url_id = "id" + str(uuid.uuid4())[:8]
+        short_url_id = str(uuid.uuid4())[:8]
+        short_url_id = "id:" + short_url_id
 
         # Speichere die Verknüpfung zwischen der Original-URL und der verkürzten URL in Redis
         redis().set(short_url_id, original_url)
@@ -45,9 +46,8 @@ def list_shortened_urls():
 
         # Annahme: Redis-Schlüssel für verkürzte URLs beginnen mit "short:"
         for key in redis().scan_iter(match="id:*"):
-            short_url_id = key.decode("utf-8")[3:]
+            short_url_id = key.decode("utf-8")
             original_url = redis().get(key).decode("utf-8")
-            # original_url = "dummy"
             shortened_urls.append({"id": short_url_id, "url": original_url})
 
         return jsonify(shortened_urls)
