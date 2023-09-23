@@ -1,5 +1,3 @@
-# docker-compose.yml
-
 services:
   redis-service:
     image: "redis:7.0.10-bullseye"
@@ -8,7 +6,7 @@ services:
     volumes:
       - "redis-volume:/data"
   web-service:
-    build: ./web
+    build: ./web # Baue Docker-Image für Python/Flask Umgebung
     ports:
       - "80:8000"
     environment:
@@ -17,7 +15,7 @@ services:
       - backend-network
     depends_on:
       - redis-service
-    command: "gunicorn page_tracker.app:app --bind 0.0.0.0:8000"
+    command: "gunicorn url_shortener.app:app --bind 0.0.0.0:8000" # Verwende den Gunicorn Webserver aufgrund höherer Stabilität und Skalierbarkeit
 
 networks:
     backend-network:
