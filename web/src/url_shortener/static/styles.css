@@ -60,3 +60,9 @@ h2 {
 a{
     color: #D8D8F6;
 }
+
+b {
+    color: #D8D8F6;
+    font-size: 20px;
+    display: inline;
+}

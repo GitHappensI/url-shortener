@@ -13,6 +13,9 @@ def redis():
 # Definiere die Variable HOST_NAME
 HOST_NAME = "http://localhost"
 
+# Definiere die Variable hostname_scaled --> Load Balancing
+hostname_scaled = os.uname().nodename
+
 # Erstelle und konfiguriere ein Flask-Objekt
 app = Flask(__name__, template_folder="/home/realpython/src/url_shortener/templates", static_folder="/home/realpython/src/url_shortener/static")
 
@@ -33,10 +36,10 @@ def shorten_url():
         urls_shortened = redis().incr("urls_shortened")
 
         # Zeige das HTML Template mit der generierten URL und der Anzahl der Seitenaufrufe
-        return render_template('index.html', short_url_id=short_url_id, host_url = HOST_NAME, urls_shortened=urls_shortened)
+        return render_template('index.html', short_url_id=short_url_id, host_url = HOST_NAME, urls_shortened=urls_shortened, hostname_scaled=hostname_scaled)
     
-    # Zeige das HTML Template
-    return render_template('index.html')
+    # Zeige das HTML Template mit dem zugewiesenen host
+    return render_template('index.html', hostname_scaled=hostname_scaled)
 
 # Route zur Umleitung zu einer bestimmten verkürzten URL, falls gefunden
 @app.route('/<short_url_id>')
