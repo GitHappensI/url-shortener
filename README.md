@@ -2,9 +2,10 @@
 Ein URL-Verkürzer-Projekt mit Minikube, Docker, Flask und Redis.
 
 ## Zielsetzung
-Dieses Projekt hat das Ziel, einen Webdienst zu entwickeln, der die Verkürzung von langen URLs ermöglicht. Die Kernkomponenten umfassen:
+Dieses Projekt entwickelt einen Webdienst, der es ermöglicht, lange URLs einfach und effizient zu verkürzen. Dabei kommen folgende Technologien zum Einsatz:
 
 - **Webframework:** Die Anwendung wird auf dem Flask-Webframework aufgebaut.
+- **Webserver:** Gunicorn dient als Webserver für die Anwendung.
 - **Datenbank:** Redis wird verwendet, um die Zuordnung zwischen verkürzten und Original-URLs zu speichern.
 - **Containerisierung:** Die Anwendung wird in einem Docker-Container bereitgestellt, um die Portabilität und Skalierbarkeit zu gewährleisten.
 - **Orchestrierung:** Kubernetes wird eingesetzt, um das Netzwerk für die Skalierbarkeit des Webdienstes zu verwalten.
@@ -32,18 +33,28 @@ Durch die Kombination dieser Technologien wird ein zuverlässiger und skalierbar
 < < < < └── **styles.css :** Das CSS-Stylesheet für das Styling der Benutzeroberfläche.  
 
 ## Verwendung
-Stellen Sie sicher, dass Docker, Docker-Compose und Minikube installiert sind.
-Führen Sie **"docker compose up"** im Hauptverzeichnis aus, um den Webdienst und Redis zu starten.
-Führen Sie das Kubernetes-Netzwerk im Verzeichnis "web/" aus, um den Webdienst skalieren zu können.
-Das Kubernetes-Netzwerk kann mit den folgenden Befehlen ausgeführt werden: **"kubectl apply -f redis-data-pvc.yaml"**, **"kubectl apply -f redis-service-deployment.yaml"**, 
-**"kubectl apply -f redis-service.yaml"**, **"kubectl apply -f web-service-deployment.yaml"** und **"kubectl apply -f web-service-and-ingress.yaml"**.
-Der Webdienst kann über den folgenden Befehl auf z.B. 5 Instanzen skaliert werden **"kubectl scale deployment web-deployment --replicas=5"**.
-Die Benutzeroberflächen sind unter http://localhost bzw. http://localhost/shortened_urls verfügbar.
-Zusätzlich ist der Webdienst auch über den DHBW-Server unter http://141.72.188.185 zu erreichen.
+Stellen Sie sicher, dass Docker, Docker-Compose und Minikube installiert sind. Folgen Sie dann diesen Schritten:
+
+**1. Starten Sie Docker-Compose:** Navigieren Sie zum Hauptverzeichnis des Projekts und führen Sie den folgenden Befehl aus, um den Webdienst und Redis zu starten (vgl. Screencast_Docker-Compose.mp4):  
+- **"docker compose up"**  
+
+**2. Starten Sie das skalierbare Kubernetes-Netzwerk:** Wechseln Sie in das Verzeichnis "web/" und verwenden Sie die folgenden Befehle, um das Kubernetes-Netzwerk zu erstellen und den Webdienst zu skalieren (vgl. Screencast_Minikube.mp4):  
+- **"kubectl apply -f redis-data-pvc.yaml"**  
+- **"kubectl apply -f redis-service-deployment.yaml"**  
+- **"kubectl apply -f redis-service.yaml"**  
+- **"kubectl apply -f web-service-deployment.yaml"**  
+- **"kubectl apply -f web-service-and-ingress.yaml"**  
+
+Wenn Sie den Webdienst auf beispielsweise 5 Instanzen skalieren möchten, verwenden Sie den folgenden Befehl:  
+- **"kubectl scale deployment web-deployment --replicas=5"**  
+
+**3. Zugriff auf die Benutzeroberflächen:** Nachdem die Dienste gestartet wurden, können Sie die Benutzeroberflächen über Ihren Webbrowser erreichen:
+- Der Hauptdienst ist unter http://localhost verfügbar.
+- Die Liste der verkürzten URLs finden Sie unter http://localhost/shortened_urls.
+- Zusätzlich ist der Webdienst auch über den DHBW-Server unter http://141.72.188.185 erreichbar.
 
 ## Autoren
 Leon Seelbach  
 Lukas Schönberger  
 Daniel Kleiser  
-Paul Moosmayer  
-  
+Paul Moosmayer

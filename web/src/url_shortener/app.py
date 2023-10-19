@@ -5,15 +5,15 @@ import uuid
 from flask import Flask, request, jsonify, redirect, render_template
 from redis import Redis, RedisError
 
-# Definiere die Redis Funktion und verwende die Umgebungsvariable "REDIS_URL" oder Standardwert "redis://localhost:6379"
+# Definiere die Redis-Funktion und verwende die Umgebungsvariable "REDIS_URL" oder Standardwert "redis://localhost:6379"
 @cache
 def redis():
     return Redis.from_url(os.getenv("REDIS_URL", "redis://localhost:6379"))
 
-# Definiere die Variable HOST_NAME
+# Definiere die Variable HOST_NAME für den Hostnamen
 HOST_NAME = "http://localhost"
 
-# Definiere die Variable hostname_scaled --> Load Balancing
+# Definiere die Variable hostname_scaled für Load Balancing
 hostname_scaled = os.uname().nodename
 
 # Erstelle und konfiguriere ein Flask-Objekt
@@ -35,10 +35,10 @@ def shorten_url():
         # Zähle die Anzahl der Seitenaufrufe und speichere sie in Redis
         urls_shortened = redis().incr("urls_shortened")
 
-        # Zeige das HTML Template mit der generierten URL und der Anzahl der Seitenaufrufe
+        # Zeige das HTML-Template mit der generierten URL und der Anzahl der Seitenaufrufe
         return render_template('index.html', short_url_id=short_url_id, host_url = HOST_NAME, urls_shortened=urls_shortened, hostname_scaled=hostname_scaled)
     
-    # Zeige das HTML Template mit dem zugewiesenen host
+    # Zeige das HTML-Template mit dem zugewiesenen host
     return render_template('index.html', hostname_scaled=hostname_scaled)
 
 # Route zur Umleitung zu einer bestimmten verkürzten URL, falls gefunden
@@ -55,7 +55,7 @@ def redirect_to_original_url(short_url_id):
 @app.route("/shortened_urls")
 def list_shortened_urls():
         
-    # Lege eine Liste zum Speichern der Redis Einträge fest
+    # Lege eine Liste zum Speichern der Redis-Einträge fest
     shortened_urls = []
 
     # Redis-Schlüssel für verkürzte URLs beginnen mit "id:"
