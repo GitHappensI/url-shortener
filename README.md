@@ -16,6 +16,11 @@ Durch die Kombination dieser Technologien wird ein zuverlässiger und skalierbar
 ## Verzeichnisstruktur
 **url-shortener/ :** Das Hauptverzeichnis des Projekts.  
 < ├── **Docker-Compose.yml :** Die Docker-Compose-Datei zur Bereitstellung von Redis und dem Webdienst.  
+< ├── **Anwendungsarchitektur.jpg :** Die grafische Darstellung der Anwendungsarchitektur.  
+< └── **screencast/ :** Das Verzeichnis für die Screenncasts und Erklärungsvideo.  
+ < < ├── **Erklärungsvideo.mp4 :** Erklärung der Anwendungsarchitektur.  
+ < < ├── **Screencast_Docker-Compose.mp4 :** Screencast zur Ausführung von Docker-Compose.  
+ < < ├── **Screencast_Minikube.mp4 :** Screencast zur Ausführung des Kubernetes-Netzwerks.  
 < └── **web/ :** Das Verzeichnis für den Webdienst.  
 < < ├── **Dockerfile :** Die Docker-Datei zur Erstellung des Webdienst-Containers.  
 < < ├── **constraints.txt :** Die Datei mit den Python-Abhängigkeiten.  
