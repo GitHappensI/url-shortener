@@ -16,6 +16,7 @@ Durch die Kombination dieser Technologien wird ein zuverlässiger und skalierbar
 ## Verzeichnisstruktur
 **url-shortener/ :** Das Hauptverzeichnis des Projekts.  
 < ├── **Docker-Compose.yml :** Die Docker-Compose-Datei zur Bereitstellung von Redis und dem Webdienst.  
+< ├── **Aufgabenstellung Teil 1 (Sturm).pdf :** Erarbeitete Lösung zu Teil 1 der Laborarbeit.  
 < ├── **Anwendungsarchitektur.jpg :** Die grafische Darstellung der Anwendungsarchitektur.  
 < └── **screencast/ :** Das Verzeichnis für die Screenncasts und Erklärungsvideo.  
  < < ├── **Erklärungsvideo.mp4 :** Erklärung der Anwendungsarchitektur.  
@@ -30,6 +31,7 @@ Durch die Kombination dieser Technologien wird ein zuverlässiger und skalierbar
 < < ├── **redis-service-deployment.yaml :** Die YAML-Datei zur Erstellung eines Kubernetes-Deployments für Redis.  
 < < ├── **web-service-and-ingress.yaml :** Die YAML-Datei zur Erstellung eines Kubernetes-Ingress für den Webdienst.  
 < < ├── **web-service-deployment.yaml :** Die YAML-Datei zur Erstellung eines Kubernetes-Deployments für den Webdienst.  
+< < └── **venv/ :** Das Verzeichnis mit der virtuellen Python-Umgebung.  
 < < └── **src/ :** Das Verzeichnis mit dem Quellcode des Webdienstes.  
 < < < ├── **app.py :** Die Hauptanwendungsdatei des Webdienstes.  
 < < < ├── **templates/ :** Das Verzeichnis mit HTML-Templates.  
